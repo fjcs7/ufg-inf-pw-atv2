@@ -1,57 +1,40 @@
-<%@ page import="ufg_inf_pw_2016_2_atv01.calculadora_de_imc.*"%>
+
 <form method="post">
 		<div class="container">
 		  <div class="form-group row col-md-4">
-		  	<h1>Calculadora de IMC</h1>
-		  	<h3>IMC - Índice de massa corpórea</h3>
+		  	<h1>Verfica se o Aluno Está Aprovado</h1>
 		  </div>
 	    </div>
 		<div class="container">
 		  <div class="form-group row col-md-4">
-		    <label for="altura">Sua altura: </label>
-		    <input required="required" min="0.01" value="${param.altura}" autocomplete="off"  type="number" step=0.01 placeholder="0.00" class="form-control" name="altura" id="altura">
+		    <label for="aluno">Aluno(a): </label>
+		    <input required="required" id="aluno" name="aluno" value="${param.aluno}" autocomplete="off"  type="text"  placeholder="Informe o nome do aluno..." class="form-control">
 		  </div>
 	    </div>
 	    <div class="container">
 		  <div class="form-group row col-md-4">
-		    <label for="peso">Seu Peso:</label>
-		    <input required="required" min="00.01" value="${param.peso}" autocomplete="off" type="number" step=0.01 placeholder="00.0" class="form-control" id="peso" name="peso">
+		    <label for="nota">Média Final:</label>
+		    <input required="required" min="0.0" max="10.0" value="${param.nota}" autocomplete="off" type="number" step=0.1 placeholder="0.0" class="form-control" name="nota" id="nota">
 		  </div>
 	    </div>
-	    <div class="container">
-		  <div class="form-goup row col-md-4">
-				<label for="sexo">Sexo:</label>
-				<select name="sexo" id="sexo" class="form-control" >
-				  <option <% if(request.getParameter("sexo")!=null) out.println( request.getParameter("sexo").equals("M")?"selected":""); %> value="M">Masculino</option>
-				  <option <% if(request.getParameter("sexo")!=null) out.println( request.getParameter("sexo").equals("F")?"selected":""); %>  value="F">Feminino</option>
-				</select>
-		   </div>
+   	    <div class="container">
+		  <div class="form-group row col-md-4">
+		    <label for="frequencia">Frequência(%):</label>
+		    <input required="required" min="0.0" max="100.0" value="${param.frequencia}" autocomplete="off" type="number" step=0.1 placeholder="00.0" class="form-control" name="frequencia" id="frequencia">
+		  </div>
 	    </div>
-	    <div class="container">
-			<label class="bg-danger">Obs.: O cálculo é diferenciado para homens e mulheres.</label>
-		</div>
 		<div class="container">
 		  <button type="submit" 
-		  		  class="btn btn-default" name="btnCalcular">Calcular</button> 
+		  		  class="btn btn-default" name="btnCalcular">Verificar</button> 
+		  <input hidden="true" name="status" id="status" value="${statusDoAluno}">
 		</div>
 </form>
 <p></p>
-		<% if( request.getParameter("altura") != null &&  
-			   request.getParameter("peso") != null &&
-			   request.getParameter("sexo")!= null){
-			 	CalculaImc calculadora = new CalculaImc(
-						Double.parseDouble(request.getParameter("altura")),
-						Double.parseDouble(request.getParameter("peso")),
-						request.getParameter("sexo"));
-			 	out.println("<div class=\"container\">");
-			 	out.println("  <div class=\"form-goup row col-md-12\">");
-			 	out.println("		<label><h3>O Seu Imc é        :... " + calculadora.RetornaImcCalculado()+ "</h3></label>");
-			 	out.println("  </div>");
-			 	out.println("  </div>");
-			 	out.println("<div class=\"container\">");
-			 	out.println("  <div class=\"form-goup row col-md-12\">");
-			 	out.println("		<label><h3>O Seu Resultado foi:... " + calculadora.RetornaImcCalculado()+ "</h3></label>");
-			 	out.println("  </div>");
-			 	out.println("</div>");
+<p></p>
+		<% 	
+			if(request.getParameter("aluno")!= null && request.getParameter("status")!= null ){
+				out.println("<div class=\"alert alert-success\" role=\"alert\">" + 
+						    "O Aluno(a) <strong>" + request.getParameter("aluno") + "</strong>..." +
+							"Está com Status <strong>" + request.getParameter("status") +"</strong></div>");
 			}
 		%> 

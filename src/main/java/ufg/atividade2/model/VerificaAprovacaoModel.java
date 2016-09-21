@@ -1,19 +1,23 @@
 package ufg.atividade2.model;
 
-public class VerificaAprovacao {
+public class VerificaAprovacaoModel {
 	private String nomeAluno;
 	private Float mediaAluno;
 	private Float frequenciaAluno;
 	
-	public VerificaAprovacao(String nomeAluno, Float mediaFinal, Float frequenciaPercentual){
+	public VerificaAprovacaoModel(String nomeAluno, Float mediaFinal, Float frequenciaPercentual){
 		this.nomeAluno = nomeAluno;
 		this.mediaAluno = mediaFinal;
 		this.frequenciaAluno = frequenciaPercentual;
 	}
 	
+	public VerificaAprovacaoModel(String nomeAluno, Double mediaFinal, Double frequenciaPercentual){
+		this.nomeAluno = nomeAluno;
+		this.mediaAluno = Float.parseFloat(mediaFinal.toString());
+		this.frequenciaAluno =  Float.parseFloat(frequenciaPercentual.toString());
+	}
+	
 	public String retornaStatusDoAluno(){
-		
-		//"Aprovado", "Reprovado por frequência", "Reprovado por média e frequência" ou "Reprovado por média"
 		
 		if (mediaAluno >= 6 && frequenciaAluno >= 75){
 			return "Aprovado";
@@ -27,6 +31,10 @@ public class VerificaAprovacao {
 			return "Não calculado";
 		}
 		 
+	}
+	
+	public String obtenhaNomeDoAluno(){
+		return this.nomeAluno;
 	}
 	
 }

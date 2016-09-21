@@ -29,7 +29,7 @@ public class VerificaAprovacaoController extends javax.servlet.http.HttpServlet 
 		request.getSession().setAttribute("statusDoAluno", statusDoAluno);
 
 	    //Chamando o JSP.
-	    String proximaPagina = "/index.jsp";
+	    String proximaPagina = "index.jsp";
 	    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(proximaPagina);
 	    dispatcher.forward(request, response);
 
